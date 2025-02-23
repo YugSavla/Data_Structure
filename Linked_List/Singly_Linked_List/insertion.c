@@ -52,7 +52,9 @@ void insert_end(Node* head,Node* ptr){
         temp->link=NULL;
         ptr=ptr->link;
     }
-    
+    // void insert_after(Node* head,Node* ptr){
+
+    // }
     
 }
 int main(){
