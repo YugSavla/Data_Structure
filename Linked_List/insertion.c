@@ -18,7 +18,7 @@ void display(Node* head,Node* ptr){
 Node* insert_beg(Node* head){
     int n;
     Node* tem;
-    
+    printf("\nInsertion at the beginning : ");
     printf("\nEnter the node of data how many times : ");
     scanf("%d",&n);
     for (int i = 0; i < n; i++)
@@ -32,8 +32,32 @@ Node* insert_beg(Node* head){
     return head;
     
 }
+void insert_end(Node* head,Node* ptr){
+    int n;
+    ptr=head;
+    while (ptr->link!=NULL)
+    {
+        ptr=ptr->link;
+    }
+    printf("\nInsertion at the Ending : ");
+    printf("\nEnter the node of data how many times : ");
+    scanf("%d",&n);
+    Node* temp;
+    for (int i = 0; i < n; i++)
+    {
+        temp=(Node*) malloc(sizeof(Node));
+        printf("Enter the data of the node : ");
+        scanf("%d",&temp->data);
+        ptr->link=temp;
+        temp->link=NULL;
+        ptr=ptr->link;
+    }
+    
+    
+}
 int main(){
     int n;
+    
     printf("Enter the number of nodes: ");
     scanf("%d", &n);
 
@@ -63,7 +87,9 @@ int main(){
         temp->link=NULL;
         
     }
-    head=insert_beg(head);
+
+    // head=insert_beg(head);
+    insert_end(head,ptr);
     
     display(head,ptr);
 }
