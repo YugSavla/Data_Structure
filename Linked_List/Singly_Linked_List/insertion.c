@@ -54,6 +54,9 @@ void insert_end(Node* head,Node* ptr){
     }
     
 }
+
+
+
 void insert_before(Node* head,Node* ptr)
     {
         ptr=head;
@@ -79,10 +82,41 @@ void insert_before(Node* head,Node* ptr)
             temp->link=tem;
             tem->link=ptr;
             ptr=tem;
-        }
-        
-        
+        }       
     }
+
+
+
+
+    void insert_after(Node* head,Node* ptr){
+        ptr=head;
+        int x,n;
+        Node* temp;
+        // temp=(Node*) malloc(sizeof(Node));
+        printf("\nEnter the node value after which we want insert : ");
+        scanf("%d",&x);
+        while (ptr->data!=x)
+        {            
+            ptr=ptr->link;
+            temp=ptr->link;
+            // printf("%d | %d\n",temp->data,ptr->data);
+        }
+        printf("How many nodes you want to add : ");
+        scanf("%d",&n);
+        Node* tem;
+        for (int i = 0; i < n; i++)
+        {
+            tem= (Node* ) malloc(sizeof(Node));
+            printf("\nEnter the value of the node : ");
+            scanf("%d",&tem->data);
+            ptr->link=tem;
+            tem->link=temp;
+            ptr=tem;
+        }
+    }
+
+
+
 int main(){
     int n;
     
@@ -120,6 +154,7 @@ int main(){
     // insert_end(head,ptr);
     
     display(head,ptr);
-    insert_before(head, ptr);
+    // insert_before(head, ptr);
+    insert_after(head,ptr);
     display(head,ptr);
 }
