@@ -12,18 +12,37 @@ void display(Node* head,Node* ptr){
     while (ptr!=NULL)
     {
         printf("%d->",ptr->data);
+
         ptr=ptr->link;
     }
+    printf("\n");
     
 }
 
-void delete_begin(){}
+Node* delete_begin(Node* head,Node*ptr){
+    ptr=head;
+    head=head->link;
+    free(ptr);
+    return head;
 
-void delete_end(){}
+}
 
-void delete_after(){}
+void delete_end(Node* head,Node*ptr){
+    Node* pre;
+    ptr = head;
+    while (ptr->link!=NULL)
+    {
+        pre=ptr;
+        ptr=ptr->link;
+    }
+    pre->link=NULL;
+    free(ptr);
+}
 
-void delete_before(){}
+
+// void delete_after(){}
+
+// void delete_before(){}
 
 int main(){
     int n;
@@ -57,4 +76,8 @@ int main(){
         temp->link=NULL;
         
     }
+    display(head,ptr);
+    // head=delete_begin(head,ptr);
+    delete_end(head,ptr);
+    display(head,ptr);
 }
