@@ -150,11 +150,13 @@ int main(){
         
     }
 
-    // head=insert_beg(head);
-    // insert_end(head,ptr);
+    head=insert_beg(head);
+    display(head,ptr);
+    insert_end(head,ptr);
     
     display(head,ptr);
-    // insert_before(head, ptr);
+    insert_before(head, ptr);
+    display(head,ptr);
     insert_after(head,ptr);
     display(head,ptr);
 }
