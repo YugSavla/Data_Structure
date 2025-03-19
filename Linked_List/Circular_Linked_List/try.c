@@ -8,41 +8,27 @@ typedef struct Node
 }Node;
 void display(Node* head){
     Node* ptr=head;
-    while (ptr->link!=NULL)
-    {
-        printf("%d -> ",ptr->link->data);
+    // while (ptr->link!=NULL)
+    // {
+    //     printf("%d -> ",ptr->link->data);
+    //     ptr=ptr->link;
+    // }
+    do{
+        printf("%d->",ptr->data);
         ptr=ptr->link;
-    }
+    }while (ptr!=head);
+    printf("\n");   
 }
-void s_last_node_data(Node* head,Node* ptr,int n){
-    ptr=head;
-    //  for (int i = 0; i < n-1; i++)
-    //  {
-    //         if(i==n-2){
-    //             printf("\nSecond Largest Node : %d",ptr->data);
-    //         }
-    //         ptr=ptr->link;
-    //  }
-    while (ptr->link->link!=NULL)
-    {
-        if(ptr->link->link==NULL){
-            printf("\nSecond Largest Node : %d",ptr->data);
-        }
+Node* delete_(Node* head){
+    Node* ptr=head;
+    do{
         ptr=ptr->link;
-    }
+    }while (ptr->link!=head);
+    ptr->link=head->link;
     
-     
-}
-void last_node_data(Node* head,Node* ptr){
-    ptr=head;
-    while (ptr!=NULL)
-    {
-        if(ptr->link==NULL){
-            printf("\nLast Node Data : %d ",ptr->data);
-        }
-        
-        ptr=ptr->link;
-    }
+    free(head);
+    return ptr->link;
+    
 }
 int main(){
     int n;
@@ -75,8 +61,10 @@ int main(){
         temp->link=NULL;
         
     }
+    temp->link=head;
     display(head);
-
+    head=delete_(head);
+    display(head);
     // last_node_data(head,ptr);
     // s_last_node_data(head,ptr,n);
 }

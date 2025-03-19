@@ -6,46 +6,42 @@ typedef struct Node
     int data;
     struct Node* link; 
 }Node;
-void display(Node* head){
-    Node* ptr=head;
-    while (ptr->link!=NULL)
-    {
-        printf("%d -> ",ptr->link->data);
-        ptr=ptr->link;
-    }
-}
-void s_last_node_data(Node* head,Node* ptr,int n){
-    ptr=head;
-    //  for (int i = 0; i < n-1; i++)
-    //  {
-    //         if(i==n-2){
-    //             printf("\nSecond Largest Node : %d",ptr->data);
-    //         }
-    //         ptr=ptr->link;
-    //  }
-    while (ptr->link->link!=NULL)
-    {
-        if(ptr->link->link==NULL){
-            printf("\nSecond Largest Node : %d",ptr->data);
-        }
-        ptr=ptr->link;
-    }
-    
-     
-}
-void last_node_data(Node* head,Node* ptr){
+void display(Node* head,Node* ptr){
     ptr=head;
     while (ptr!=NULL)
     {
-        if(ptr->link==NULL){
-            printf("\nLast Node Data : %d ",ptr->data);
-        }
-        
+        printf("%d->",ptr->data);
         ptr=ptr->link;
     }
+    printf("\n");
+    
+}
+Node* copy(Node* new_head,Node* head,int n){
+    Node* ptr;
+    Node* ptr1=head;
+    Node* temp;
+    ptr=temp;
+    temp=(Node*) malloc(sizeof(Node));
+    new_head=temp;
+    new_head->data=head->data;
+    ptr=new_head;
+    ptr->link=NULL;
+    for (int i = 2; i <= n; i++)
+    {
+        
+        temp=(Node*) malloc(sizeof(Node));
+        ptr->link=temp;
+        temp->data=ptr1->data;
+        ptr=ptr->link;
+        temp->link=NULL;
+
+    }
+    return new_head;
+    
 }
 int main(){
     int n;
+    
     printf("Enter the number of nodes: ");
     scanf("%d", &n);
 
@@ -75,8 +71,8 @@ int main(){
         temp->link=NULL;
         
     }
-    display(head);
-
-    // last_node_data(head,ptr);
-    // s_last_node_data(head,ptr,n);
+    display(head,ptr);
+    Node* new_head;
+    new_head=copy(new_head,head,n);
+    display(head,ptr);
 }

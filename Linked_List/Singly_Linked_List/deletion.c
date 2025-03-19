@@ -61,7 +61,19 @@ void delete_after(Node* head,Node* ptr){
 
     
 }
-
+void delete_spec(Node* head){
+    int x;
+    Node* ptr=head,*temp,*temp1;
+    printf("\n Enter the data to be deleted: ");
+    scanf("%d",&x);
+    while(ptr->data!=x){
+        temp=ptr;
+        ptr=ptr->link;
+    }
+    temp1=ptr->link;
+    free(ptr);
+    temp->link=temp1;
+}
 void delete_before(Node* head,Node*ptr){
     int data;
     printf("\nEnter the data Before want to delete: ");
@@ -116,6 +128,7 @@ int main(){
     // head=delete_begin(head,ptr);
     // delete_end(head,ptr);
     // delete_after(head,ptr);
-    delete_before(head,ptr);
+    // delete_before(head,ptr);
+    delete_spec(head);
     display(head,ptr);
 }
