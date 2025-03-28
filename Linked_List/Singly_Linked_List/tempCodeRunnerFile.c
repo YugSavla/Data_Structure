@@ -1,1 +1,1 @@
-display(head,ptr);
+	// clrscr();
