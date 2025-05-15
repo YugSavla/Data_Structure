@@ -119,41 +119,33 @@ void insert_before(Node* head,Node* ptr)
 
 int main(){
     int n;
-    
     printf("Enter the number of nodes: ");
     scanf("%d", &n);
-
     // If the user enters a non-positive number of nodes, exit the program
     if (n <= 0) {
         printf("Invalid number of nodes.\n");
         return 1;
     }
-
     Node *head = NULL, *temp;
     head=(Node*)malloc(sizeof(Node));
     printf("Enter data for node 1: ");
     scanf("%d", &head->data);
     head->link = NULL; // The first node points to NULL initially
-
     // Pointer to the current node
     Node* ptr = head;
-
     // Create and link the remaining nodes
     for (int i = 2; i <= n; i++) {
         printf("Enter data for node %d: ",i);
         temp = (Node*) malloc(sizeof(Node));
-        scanf("%d",&temp->data);
-        
+        scanf("%d",&temp->data);    
         ptr->link=temp;
         ptr=ptr->link;
-        temp->link=NULL;
-        
+        temp->link=NULL;   
     }
 
     head=insert_beg(head);
     display(head,ptr);
     insert_end(head,ptr);
-    
     display(head,ptr);
     insert_before(head, ptr);
     display(head,ptr);

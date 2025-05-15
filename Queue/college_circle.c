@@ -1,21 +1,12 @@
-int findTheWinner(int n, int k) {
-    int* circle = (int*)malloc(n * sizeof(int));
-    for (int i = 0; i < n; ++i) {
-        circle[i] = i + 1;
-    }
-    int cur_ind = 0;
-    int size = n;
-
-    while (size > 1) {
-        int next_to_remove = (cur_ind + k - 1) % size;
-        for (int i = next_to_remove; i < size - 1; ++i) {
-            circle[i] = circle[i + 1];
-        }
-        size--;
-        cur_ind = next_to_remove;
-    }
-
-    int winner = circle[0];
-    free(circle);
-    return winner;
+#include <stdio.h>
+int findWinner(int n, int k) {
+   int winner = 0;
+   for (int i = 2; i <= n; i++)
+       winner = (winner + k) % i;
+   return winner +1;    
 }
+int main() {
+    int n = 5, k = 2;
+    printf("Winner is person %d\n", findWinner(n, k));
+    return 0;
+ }

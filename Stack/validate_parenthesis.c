@@ -1,57 +1,55 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#define max 100
-char stack[max];
-int top=-1;
-void push(char symbol){
-    stack[++top]=symbol;
-}
-char pop(){
-    char c=stack[top];
-    stack[top]='\0';
-    top--;
-    return c;
-}
-int toValidate(){
-    int k=1;
-    if(strlen(stack)%2!=0){
-        
-        return 0;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX 100
+
+char stack[MAX];
+int top = -1;
+
+void push(char symbol) {
+    if (top < MAX - 1) {
+        stack[++top] = symbol;
     }
-    else 
-    {
-        
-        for (int i = 0; i < strlen(stack); i++)
-        {
-            char par=pop();
-            if(par==')' || par =='}' || par==']'){
-                if(par=='(' && (stack[top]=='}' && stack[top]==']')){
-                    k=0;
-                }
-                else if(par=='{' && (stack[top]==')' && stack[top]==']')){
-                    k=0;
-                }
-                else if(par=='[' && (stack[top]=='}' && stack[top]==')')){
-                    k=0;
-                }
+}
+
+char pop() {
+    if (top >= 0) {
+        return stack[top--];
+    }
+    return '\0';
+}
+
+int isValid(char* s) {
+    int len = strlen(s);
+    if (len % 2 != 0) return 0; // Odd length cannot be balanced
+
+    for (int i = 0; i < len; i++) {
+        char c = s[i];
+        if (c == '(' || c == '{' || c == '[') {
+            push(c); // Push opening brackets onto the stack
+        } else {
+            if (top == -1) return 0; // No opening bracket to match
+            char top_char = pop();
+            if ((c == ')' && top_char != '(') ||
+                (c == '}' && top_char != '{') ||
+                (c == ']' && top_char != '[')) {
+                return 0; // Mismatched brackets
             }
-            
         }
-               
     }
-    return k; 
+    return top == -1; // Stack must be empty at the end
 }
-int main(){
-    printf("Enter the paranthesis : \n");
-    gets(stack);
-    int val=toValidate();
-    if(val==0){
-        printf("Not valid");
+
+int main() {
+    char input[MAX];
+    printf("Enter the parentheses: ");
+    fgets(input, MAX, stdin);
+    input[strcspn(input, "\n")] = '\0'; // Remove newline character
+
+    if (isValid(input)) {
+        printf("Valid\n");
+    } else {
+        printf("Not valid\n");
     }
-    else
-    {
-        printf("Valid");
-    }
-    
+    return 0;
 }

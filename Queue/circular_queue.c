@@ -39,7 +39,6 @@ void enqueue(){
         else{
             rear++;
         }
-
     }
     queue[rear]=x;
 }
